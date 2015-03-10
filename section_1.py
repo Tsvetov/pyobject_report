@@ -3,6 +3,29 @@
 __author__ = 'cpn'
 
 
+def ger_attr(obj):
+    """
+    1. Как получить список всех атрибутов объекта
+    """
+    return dir(obj)
+
+
+def get_public_attr(obj):
+    """
+    2. Как получить список всех публичных атрибутов объекта
+    """
+    # return [atr for atr in dir(obj) if not atr.startswith('_')]
+    return filter(lambda atr: not atr.startswith('_'), dir(obj))
+
+
+def get_method(obj):
+    """
+    3. Как получить список методов объекта
+    """
+    # return [atr for atr in dir(obj) if callable(getattr(obj, atr))]
+    return filter(lambda atr: callable(getattr(obj, atr)), dir(obj))
+
+
 def get_help(obj):
     """
     4. В какой "магической" переменной хранится содержимое help?
@@ -16,6 +39,50 @@ def get_help(obj):
     """
 
     return obj.__doc__
+
+
+def concat_tuple(*args):
+    """
+    5. Есть два кортежа, получить третий как конкатенацию первых двух
+    >>> t_1 = (1,2)
+    >>> t_2 = (3, 4)
+    >>> concat_tuple(t_1, t_2)
+    (1, 2, 3, 4)
+
+    """
+    t_1 = args[0]
+    t_2 = args[1]
+
+    return t_1+t_2
+
+
+def concat_unic(*args):
+    """
+    6. Есть два кортежа, получить третий как объединение
+    уникальных элементов первых двух кортежей
+    """
+    set_1 = set(args[0])
+    set_2 = set(args[1])
+
+    return tuple(set_1 | set_2)
+
+
+def clice_list(lst):
+    """
+    7. Почему если в цикле меняется список, то используется
+    for x in lst[:], что означает [:]?
+
+    >>> lst = [1, 2, 3]
+    >>> res = clice_list(lst)
+    >>> res[1] != res[2]
+    True
+    """
+    if id(lst) != id(lst[:]):
+        return (
+            'При [:] id объектов не равны:', id(lst), id(lst[:])
+        )
+    else:
+        pass
 
 
 def two_list_to_dict(list_1, list_2):
