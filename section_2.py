@@ -55,6 +55,18 @@ def addition_usual(number):
     return add
 
 
+def addition_range():
+    """
+    Написать фабрику, аналогичную п.2, но возвращающей список таких функций
+
+    # список из функций сложения от 0 до 5 включительно
+    >>> additionals = addition_range(0, 5)
+
+    т.е. аналогичное [add0, add1, add2, add3, add4, add5]
+    """
+    pass
+
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
